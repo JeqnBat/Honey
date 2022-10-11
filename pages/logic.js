@@ -8,6 +8,21 @@
 
 import XLSX from 'xlsx'
 
+/**
+ * ============ FUNCTIONS INDEX ============
+ * 
+ * 1. XLSM FILE PARSER
+ * 2. WEEK PICKER
+ * 3. DAY PICKER
+ * 4. COLUMN READER
+ * 5. ROW READER
+ * 6. DAY FINDER
+ * 7. NAMES FINDER
+ * 8. SHIFTS FINDER
+ * 
+ * 
+ */
+
 /* 1. PARSER
 ________________________________________________________ */
 /**
@@ -39,11 +54,10 @@ ________________________________________________________ */
 Date.prototype.getWeek =  function() {
   const janFirst = new Date(this.getFullYear(),0,1)
   let firstMonday
-
   for (let i = 0; i < 6; i++) {
     // Sunday - Saturday : 0 - 6 => Monday[1]
     if (janFirst.getDate()+i === 1) {
-      firstMonday = janFirst.setDate(janFirst.getDate()+i)
+      firstMonday = janFirst.setDate(janFirst.getDate()) + 172800000
     }
   }
 
@@ -98,20 +112,36 @@ ________________________________________________________ */
  * @param {string} number vertical index of the table (= row number)
  * @param {object} data spreasheet as JS object
  * 
+ * @returns {string} regExp to match against selected number
  */
-const readRow = (number, data) => {
+const readRow = (number) => {
   // les rows correspondant aux horaires sont sur le même index que le day
   // todayIndex pour les begin shifts et todayIndex+1 pour les end shifts
-  for (const key in data) {
-    if (key.endsWith(number)) {
-      console.log(data[key])
-    }
+  const oneDigit = new RegExp(`[A-Z]{1,2}[${number}]\\b`, 'g')
+  const twoDigits = new RegExp(`[A-Z]{1,2}[${number[0]}][${number[1]}]\\b`, 'g')
+  const threeDigits = new RegExp(`[A-Z]{1,2}[${number[0]}][${number[1]}][${number[2]}]\\b`, 'g')
+  let regex
+  switch(number.length) {
+    case 1:
+      regex = oneDigit
+      break
+    case 2:
+      regex = twoDigits
+      break
+    case 3: 
+      regex = threeDigits
+      break
+    default:
+      console.log('provide a number')
+      break
   }
+
+  return regex
 }
 /* 6. FINDDAY
 ________________________________________________________ */
 /**
- * <B>DESCR:</B>
+ * <b>DESCR:</b><br>
  * Reads column A where days are always written;
  * If cell content is string & matches the dayTag, save its index
  * I.E the numbers following the first letter
@@ -131,12 +161,13 @@ const findDay = (tag, data) => {
       day = el.slice(1)
     }
   })
+
   return day
 }
 /* 7. FINDNAMES
 ________________________________________________________ */
 /**
- * <B>DESCR:</B>
+ * <b>DESCR:</b><br>
  * Reads column A where employees names are always written.
  * Starts at Today's Index (horizontal axis)
  * Pushes all the new names into employees array
@@ -170,19 +201,41 @@ const findNames = (todayIndex, data) => {
 /* 8. FINDSHIFTS
 ________________________________________________________ */
 /**
- * <B>DESCR:</B>
- * Reads column A where employees names are always written.
- * Starts at Today's Index (horizontal axis)
- * Pushes all the new names into employees array
+ * <b>DESCR:</b><br>
+ * Parse employee's row for 1 day, returns the value of all
+ * the active cells with their column identifier
  * 
  * @param {object} e event object containing row's index value
  * @param {object} data the JS object representation of the spreadsheet
  * 
- * @returns {array} all employees names for this day
  */
-const findShift = (e, data) => {
-  console.log(e.target.value)
-  readRow(e.target.value, data)
+const findShift = (e, data, today) => {
+  const number = e.target.value
+  const regex = readRow(number)
+
+  let hours = []
+
+  let hoursNb
+
+  for (const key in data) {
+    if (key.match(regex)) {
+      if (data[key].s.patternType === 'solid') {
+        hours.push(key.replace(number, ''))
+      }
+      // save daily total hours
+      if (key.includes('AD')) {
+        hoursNb = data[key].v
+      }
+    }
+  }
+  if (hours.length === 0) {
+    return { dayAtWork: false }
+  } else {
+    let beginIndex = hours[0] + today
+    let endIndex = hours[hours.length-1] + (parseInt(today)+1)
+
+    return { dayAtWork: true, starts: data[beginIndex].v , ends: data[endIndex].v, duration: hoursNb }
+  }
 }
 
 export { parser, dayPicker, readCol, readRow, findDay, findNames, findShift }
