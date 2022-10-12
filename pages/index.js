@@ -1,4 +1,4 @@
-import Parser from './components/Parser'
+import Parser from '../components/Parser'
 
 const Home = () => {
   return (
@@ -7,5 +7,3 @@ const Home = () => {
 }
 
 export default Home
-
-

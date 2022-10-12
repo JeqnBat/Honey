@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
-
-import { parser, dayPicker, readCol, readRow, findDay, findNames, findShift } from '../logic.js'
-
+import { parser, dayPicker, findDay, findNames, findShift } from '../lib/logic.js'
 
 const Parser = () => {
-  const [loaded, setLoaded] = useState(false)
   const [data, setData] = useState(null)
-  const [weekNb, setWeekNb] = useState('lol')
+  const [loaded, setLoaded] = useState(false)
+  const [weekNb, setWeekNb] = useState(null)
   const [dayTag, setDayTag] = useState(null)
   const [todayIndex, setTodayIndex] = useState(null)
   const [employees, setEmployees] = useState([])
@@ -21,15 +19,20 @@ const Parser = () => {
     setDayTag(dayPicker())
     setLoaded(true)
   }
+  // triple useEffect to emulate loading async sequence
   useEffect(() => {
     init()
-    // eslint-disable-next-line
   }, [])
-
-  // Show Object
-  const handleClick = () => {
-    console.log(data)
-  }
+  useEffect(() => {
+    if (data !== null) {
+      setTodayIndex(findDay(dayTag, data[`S${weekNb}`]))
+    }
+  }, [data])
+  useEffect(() => {
+    if (todayIndex !== null) {
+      setEmployees(findNames(todayIndex, data[`S${weekNb}`]))
+    }
+  }, [todayIndex])
 
   if (!loaded) {
     return (
@@ -41,18 +44,6 @@ const Parser = () => {
     <>
       <p> nous sommes la semaine numéro : {weekNb} </p>
       <p> le jour de la semaine est {dayTag}</p>
-      <p onClick={handleClick}>
-        1. Afficher l'objet XLSM
-      </p>
-      <p onClick={() => readCol('A', data[`S${weekNb}`])}>
-        2. Lire la colonne A
-      </p>
-      <p onClick={() => setTodayIndex(findDay(dayTag, data[`S${weekNb}`]))}>
-        3. Matcher {dayTag} avec la liste dans l'objet et trouver l'index : {todayIndex}
-      </p>
-      <p onClick={() => setEmployees(findNames(todayIndex, data[`S${weekNb}`]))}>
-        4. Lister les noms du jour
-      </p>
       <select name="employee" id="employee" onChange={(e) => setShift(findShift(e, data[`S${weekNb}`], todayIndex))}>
         {employees.map(el => (
           <option 
