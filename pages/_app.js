@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import '../styles/style.css'
 
 const Honey = ({ Component, pageProps }) => {
   return <Component {...pageProps} />

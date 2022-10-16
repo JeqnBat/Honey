@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { parser, dayPicker, findDay, findNames, findShift } from '../lib/logic.js'
+import Header from '../components/header/Header'
+import '../styles/Home.module.css'
 
-const Parser = () => {
+const Home = () => {
   const [data, setData] = useState(null)
   const [loaded, setLoaded] = useState(false)
   const [weekNb, setWeekNb] = useState(null)
@@ -41,7 +43,8 @@ const Parser = () => {
   }
 
   return (
-    <>
+    <div className='container'>
+      <Header weekNb={weekNb} />
       <p> nous sommes la semaine numéro : {weekNb} </p>
       <p> le jour de la semaine est {dayTag}</p>
       <select name="employee" id="employee" onChange={(e) => setShift(findShift(e, data[`S${weekNb}`], todayIndex))}>
@@ -62,9 +65,8 @@ const Parser = () => {
           :
         <p>pas de travail</p>
       }
-    </>
+    </div>
   )
 }
 
-
-export default Parser
+export default Home
