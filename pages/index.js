@@ -1,75 +1,114 @@
 import React, { useEffect, useState } from 'react'
-import { parser, dayPicker, findDay, findNames, findShift } from '../lib/logic.js'
+import { parser, dayPicker, findDayIndex, findNames, findShift } from '../lib/logic.js'
 import Loading from '../components/loading/Loading'
-import Header from '../components/header/Header'
+import Header from '/components/header/Header'
+import Solo from '../components/soloView/Solo'
+import Global from '../components/globalView/Global'
 
 const Home = () => {
-  const [data, setData] = useState(null)
-  const [loaded, setLoaded] = useState(false)
-  const [weekNb, setWeekNb] = useState(null)
-  const [dayTag, setDayTag] = useState(null)
-  const [todayIndex, setTodayIndex] = useState(null)
-  const [employees, setEmployees] = useState([])
-  const [shift, setShift] = useState({})
-  const today = new Date()
+  const [page, setPage] = useState({
+    data: null,
+    weekNb: null,
+    dayTag: null,
+    dayIndex: null,
+    employees: null,
+    employee: null,
+    status: 'loading'
+  })
 
   const init = async () => {
-    setData(await parser())
-    // debug file limitation to week 40
-    // setWeekNb(today.getWeek())
-    setWeekNb(40)
-    setDayTag(dayPicker())
-    setLoaded(true)
+    const today = new Date()
+    
+    page.data = await parser()
+    // page.weekNb = today.getWeek()
+    page.weekNb = '43'
+    page.dayTag = dayPicker()
+    page.dayIndex = findDayIndex(page.dayTag, page.data[`S${page.weekNb}`])
+    page.employees = findNames(page.dayIndex, page.data[`S${page.weekNb}`])
+
+    setPage({
+      ...page,
+      status: 'home'
+    })
   }
-  // triple useEffect to emulate loading async sequence
   useEffect(() => {
     init()
   }, [])
   useEffect(() => {
-    if (data !== null) {
-      setTodayIndex(findDay(dayTag, data[`S${weekNb}`]))
+    // Prevent bug on first load because DATA has not been fetched & cant be displayed yet
+    if (page.status !== 'loading') {
+      page.dayIndex = findDayIndex(page.dayTag, page.data[`S${page.weekNb}`])
+      page.employees = findNames(page.dayIndex, page.data[`S${page.weekNb}`])
+      setPage({
+        ...page
+      })
     }
-  }, [data])
-  useEffect(() => {
-    if (todayIndex !== null) {
-      setEmployees(findNames(todayIndex, data[`S${weekNb}`]))
-    }
-  }, [todayIndex])
+  }, [page.dayTag])
 
-  if (!loaded) {
-    return (
-      <Loading />
-    )
+  /* ALL EVENTS
+  ________________________________________________________ */
+  const events = (e, type) => {
+    switch (type) {
+      case 'dayClick':
+        setPage({
+          ...page,
+          dayTag: e.target.getAttribute('tag')
+        })
+        break
+      case 'nameClick':
+        setPage({
+          ...page,
+          employee: e.target.getAttribute('name'),
+          status: 'soloInterface'
+        })
+        break
+      case 'backArrowClick':
+        setPage({
+          ...page,
+          status: 'home'
+        })
+        break
+      default:
+        return
+    }
   }
-
-  return (
-    <div className='container'>
-      <Header weekNb={weekNb} />
-      <p> nous sommes la semaine numéro : {weekNb} </p>
-      <p> le jour de la semaine est {dayTag}</p>
-      <select name="employee" id="employee" onChange={(e) => setShift(findShift(e, data[`S${weekNb}`], todayIndex))}>
-        {employees.map(el => (
-          <option 
-            key={el.index}
-            value={el.index}
-          >
-            {el.name}
-          </option>
-        ))}
-      </select>
-      {
-        shift.dayAtWork
-          ?
-        <div>
-          <p>{shift.starts} - {shift.ends}</p>
-          <p>heures travaillées aujourd'hui</p>
-          <p>{shift.duration}</p>
+  /* ALL RETURNS 
+  _________________________________________________ */
+  /**
+   * <b>DESCR:</b><br>
+   * SWITCH pour afficher les différentes pages plutôt qu'un component dédié
+   */
+  switch (page.status) {
+    case 'loading':
+      return <Loading />
+    case 'home':
+      return (
+        <div id='container'>
+          <Header
+            weekNb={page.weekNb}
+            activeDay={page.dayTag}
+            arrowEvent={(e) => events(e, 'backArrowClick')}
+            dayEvent={(e) => events(e, 'dayClick')}
+          />
+          <Global names={page.employees} event={(e) => setPage({...page, dayTag: e.target.getAttribute('tag')})} 
+          />
         </div>
-          :
-        <p>pas de travail</p>
-      }
-    </div>
-  )
+      )
+    case 'soloInterface':
+      return (
+        <div id='container'>
+          <Header
+            weekNb={page.weekNb}
+            activeDay={page.dayTag}
+            arrowEvent={(e) => events(e, 'backArrowClick')}
+            dayEvent={(e) => events(e, 'dayClick')}
+          />
+          <Solo shift={page.employee.shift} />
+        </div>
+      )
+    default:
+      break
+  }
 }
 
 export default Home
