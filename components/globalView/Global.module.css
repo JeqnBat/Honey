@@ -13,7 +13,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   background: crimson;
   border-radius: 6px;
   font-size: 1.5rem;
@@ -23,17 +23,36 @@
   font-size: 1.5rem;
   font-weight: lighter;
   margin: 0;
+  z-index: 10;
 }
 .details > h4 {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: lighter;
   font-family: sans-serif;
   margin: 0;
 }
 .morning {
+  position: relative;
   color: var(--secondary);
-  background: rgb(255, 235, 198);
+  background: linear-gradient(#aad6ff, #b1c7db);
+}
+.morning::after {
+  position: absolute;
+  content: ' ';
+  inset: 5px;
+  background: url('/icons/sun.png') no-repeat top right;
+  background-size: 20%;
+  filter: drop-shadow(0px 0px 4px gold);
 }
 .eve {
-  background: rgb(67, 66, 77);
+  position: relative;
+  background: linear-gradient(#06080a, #16181b);
+}
+.eve::after {
+  position: absolute;
+  content: ' ';
+  inset: 5px;
+  background: url('/icons/moon.png') no-repeat top right;
+  background-size: 20%;
+  filter: drop-shadow(0px 0px 4px antiquewhite);
 }

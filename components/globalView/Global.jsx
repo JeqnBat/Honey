@@ -13,6 +13,7 @@ const Global = ({ names, event}) => {
             className={[el.shift.morning ? GlobalStyles.morning : GlobalStyles.eve, GlobalStyles.details].join(' ')}
             onClick={event}
           >
+            <div className='spacinho'></div>
             <h3>{el.name}</h3>
             <h4>{el.shift.starts} - {el.shift.ends}</h4>
           </div>
