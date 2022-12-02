@@ -6,21 +6,29 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px solid white;
-  padding: 15px;
-  border-radius: 6px;
+  padding: 15px 20px;
+  margin: 0 auto;
+  width: 60%;
   font-size: 3rem;
+  border-radius: 8px;
   color: var(--secondary);
   background: var(--primary);
-  text-transform: capitalize;
 }
 #calendar > div:first-child {
+  font-size: .8rem;
+  text-transform: uppercase;
+}
+#calendar > div:first-child > span:nth-child(2) {
+  color: var(--active);
+}
+#calendar > div:nth-child(2) {
   position: relative;
   text-align: center;
   padding: 5px;
   margin-bottom: 10px;
+  animation: 200s ease-in-out fade-in;
 }
-#calendar > div:first-child::after {
+#calendar > div:nth-child(2)::after {
   position: absolute;
   top: 100%;
   left: 25%;
@@ -28,20 +36,40 @@
   content: ' ';
   border-bottom: 2px solid var(--secondary);
 }
-#calendar > div:nth-child(2) {
+#calendar > div:nth-child(3) {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
   font-size: 1.5rem;
+  animation: 200s ease-in-out fade-in;
 }
 #week {
+  cursor: pointer;
   display: flex;
-  width: calc(100vw - 30px);
+  width: 100%;
   justify-content: space-between;
- }
- #week > span {
-  padding-bottom: 10px;
- }
- .active {
-  border-bottom: 4px solid var(--active);
- }
- .backArrow {
-  font-size: 1.25rem;
- }
+}
+#week > span {
+  font-family: monospace;
+  font-size: 1rem;
+  text-align: center;
+  padding: 15px 0;
+  text-transform: uppercase;
+  border-radius: 15px;
+  width: 100%;
+  transition: all .1s ease-in-out;
+}
+.active {
+  background: var(--primary);
+  color: var(--secondary);
+}
+
+/* ANIMATIONS ___________________________________ */
+@-webkit-keyframes fade-in {
+  0% { opacity: 0; }
+  .1% { opacity: 1; }
+}
+@keyframes fade-in {
+  0% { opacity: 0; }
+  .1% { opacity: 1; }
+}

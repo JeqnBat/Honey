@@ -2,9 +2,18 @@
  * APP & CSS by JB PELLIER @https://github.com/JeqnBat
  * Home Component
  */
+
+/** ================ INDEX ================ 
+ *
+ * 1. GLOBAL STYLES & VARIABLES
+ * 2. RESPONSIVE
+ *
+ */
+
+/* 1. GLOBAL STYLES & VARIABLES ________________________ */
 :root {
   --primary: white;
-  --secondary: rgb(40, 42, 44);
+  --secondary: #1d1d20;
 	--active: rgb(255, 0, 102);
   --body-font: Arial, Helvetica, sans-serif;
   --monospace: monospace;
@@ -13,6 +22,10 @@
 html, body {
   margin: 0;
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary);
 }
 #container {
   background: var(--secondary);
@@ -23,15 +36,26 @@ html, body {
   justify-content: flex-start;
   color: var(--primary);
   font-family: var(--body-font);
+  width: 100vw;
+}
+#container > header {
+  width: 100%;
 }
 .spacer {
-  width: 100vw;
+  width: auto;
   height: 30px;
 }
 .spacinho {
-  width: 100%;
+  width: auto;
   height: 1px;
 }
 .hide {
   display: none;
+}
+
+/* RESPONSIVE ___________________________________ */
+@media screen and (min-width: 500px ) {
+  #container {
+    width: 500px;
+  }
 }

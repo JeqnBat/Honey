@@ -4,7 +4,7 @@
 #pick {
   display: grid;
   grid-gap: 10px;
-  padding: 10px;
+  padding: 0 10px;
   grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: minmax(120px, auto);
   width: calc(100% - 20px);
@@ -15,9 +15,10 @@
   align-items: center;
   justify-content: space-evenly;
   background: crimson;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1.5rem;
   text-transform: capitalize;
+  animation: 300s ease-in-out fade-in;
 }
 .details > h3 {
   font-size: 1.5rem;
@@ -46,7 +47,7 @@
 }
 .eve {
   position: relative;
-  background: linear-gradient(#06080a, #16181b);
+  background: linear-gradient(#06080a, #0f1113);
 }
 .eve::after {
   position: absolute;
@@ -55,4 +56,14 @@
   background: url('/icons/moon.png') no-repeat top right;
   background-size: 20%;
   filter: drop-shadow(0px 0px 4px antiquewhite);
+}
+
+/* ANIMATIONS ___________________________________ */
+@-webkit-keyframes fade-in {
+  0% { opacity: 0; }
+  .1% { opacity: 1; }
+}
+@keyframes fade-in {
+  0% { opacity: 0; }
+  .1% { opacity: 1; }
 }
