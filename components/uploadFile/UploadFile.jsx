@@ -1,43 +1,36 @@
-import { useState } from "react"
+import React, { useState } from 'react'
+import axios from 'axios'
 
-const uploadFile = () => {
-  const [image, setImage] = useState(null)
-  const [createObjectURL, setCreateObjectURL] = useState(null)
+function UploadFile() {
+  const [file, setFile] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [response, setResponse] = useState(null)
 
-  const uploadToClient = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      const i = event.target.files[0]
-
-      setImage(i)
-      setCreateObjectURL(URL.createObjectURL(i))
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      const { data } = await axios.post('api/upload', formData)
+      setResponse(data)
+    } catch (err) {
+      console.log(err)
     }
-  }
-
-  const uploadToServer = async (event) => {
-    const body = new FormData()
-    body.append("file", image)
-    const response = await fetch("./api/file", {
-      method: "POST",
-      body
-    })
+    setLoading(false)
   }
 
   return (
-    <div>
-      <div>
-        <img src={createObjectURL} />
-        <h4>Select Image</h4>
-        <input type="file" name="myImage" onChange={uploadToClient} />
-        <button
-          className="btn btn-primary"
-          type="submit"
-          onClick={uploadToServer}
-        >
-          Send to server
+    <>
+      <form onSubmit={handleSubmit}>
+        <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+        <button type="submit" disabled={loading}>
+          {loading ? 'Uploading...' : 'Upload'}
         </button>
-      </div>
-    </div>
+      </form>
+      {response && <div>{response.message}</div>}
+    </>
   )
 }
 
-export default uploadFile
+export default UploadFile

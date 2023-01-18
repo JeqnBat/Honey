@@ -3,6 +3,7 @@ import { parser, dayPicker, findDay, findNames } from '../lib/logic.js'
 import Loading from '../components/loading/Loading'
 import Header from '/components/header/Header'
 import Global from '../components/globalView/Global'
+import Controller from '../components/controller/Controller'
 
 const Home = () => {
   const [page, setPage] = useState({
@@ -81,6 +82,7 @@ const Home = () => {
     case 'home':
       return (
         <div id='container'>
+          <Controller />
           <Header
             weekNb={page.trueWeek}
             date={page.fullDate}
