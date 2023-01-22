@@ -15,7 +15,7 @@ function UploadFile() {
       const { data } = await axios.post('api/upload', formData)
       setResponse(data)
     } catch (err) {
-      console.log(err)
+      setResponse(err)
     }
     setLoading(false)
   }
