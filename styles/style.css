@@ -6,11 +6,12 @@
 /** ================ INDEX ================ 
  *
  * 1. GLOBAL STYLES & VARIABLES
- * 2. RESPONSIVE
+ * 2. CUSTOM FONTS
+ * 3. RESPONSIVE
  *
  */
 
-/* 1. GLOBAL STYLES & VARIABLES ________________________ */
+/* 1. GLOBAL STYLES & VARIABLES ____________________ */
 :root {
   --primary: white;
   --secondary: #1d1d20;
@@ -18,6 +19,7 @@
   --body-font: Arial, Helvetica, sans-serif;
   --monospace: monospace;
   --padding: 12px;
+  --logo-font: 'Honey'
 }
 html, body {
   margin: 0;
@@ -27,7 +29,11 @@ html, body {
   justify-content: center;
   background: var(--secondary);
 }
+body.overlay-active {
+  overflow: hidden;
+}
 #container {
+  position: relative;
   background: var(--secondary);
   min-height: 100vh;
   display: flex;
@@ -40,6 +46,8 @@ html, body {
 }
 #container > header {
   width: 100%;
+  /* fit the position fixed menu */
+  margin-top: 50px;
 }
 .spacer {
   width: auto;
@@ -52,8 +60,14 @@ html, body {
 .hide {
   display: none;
 }
-
-/* RESPONSIVE ___________________________________ */
+/* CUSTOM FONTS ____________________________________ */
+@font-face {
+	font-family: 'Honey';
+	src: url('../public/fonts/Honey.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+/* RESPONSIVE ______________________________________ */
 @media screen and (min-width: 500px ) {
   #container {
     width: 500px;

@@ -1,0 +1,23 @@
+/**
+ * UPLOAD.MODULE.CSS
+ */
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#wrapper > header {
+  font-family: monospace;
+  text-transform: uppercase;
+}
+#wrapper > form > label {
+  text-align: center;
+}
+#wrapper > form > label > input {
+  display: none;
+}
+#wrapper > form > label > img {
+  width: 50%;
+  filter: invert();
+}

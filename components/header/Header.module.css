@@ -9,26 +9,19 @@
   padding: 15px 20px;
   margin: 0 auto;
   width: 60%;
-  font-size: 3rem;
+  font-size: 2.5rem;
   border-radius: 8px;
   color: var(--secondary);
   background: var(--primary);
 }
 #calendar > div:first-child {
-  font-size: .8rem;
-  text-transform: uppercase;
-}
-#calendar > div:first-child > span:nth-child(2) {
-  color: var(--active);
-}
-#calendar > div:nth-child(2) {
   position: relative;
   text-align: center;
   padding: 5px;
   margin-bottom: 10px;
   animation: 200s ease-in-out fade-in;
 }
-#calendar > div:nth-child(2)::after {
+#calendar > div:first-child::after {
   position: absolute;
   top: 100%;
   left: 25%;
@@ -36,11 +29,11 @@
   content: ' ';
   border-bottom: 2px solid var(--secondary);
 }
-#calendar > div:nth-child(3) {
+#calendar > div:nth-child(2) {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   animation: 200s ease-in-out fade-in;
 }
 #week {

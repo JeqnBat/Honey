@@ -1,0 +1,110 @@
+/**
+ * MENU.MODULE.CSS
+ */
+#menu {
+  position: fixed;
+  top: 0px;
+  padding: 0;
+  margin: 0;
+  width: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--secondary);
+  z-index: 12;
+}
+#menu > #button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  transition: all .1s ease-in-out;
+}
+#menu > #button.active {
+  background: rgb(50, 50, 50);
+}
+#menu > #button > .dot {
+  height: 3px;
+  width: 3px;
+  margin: 1.5px;
+  border-radius: 2px;
+  background: var(--primary);
+}
+#overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: black;
+  opacity: 0;
+  height: inherit;
+  transition: all .1s ease-in-out .1s;
+}
+#overlay.active {
+  z-index: 100;
+  opacity: 0.6;
+}
+#bottomSheet {
+  background: var(--secondary);
+  border-radius: 10px;
+  position: fixed;
+  z-index: 200;
+  margin: 0 8px 24px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  z-index: -1;
+  font-family: "Roboto","Arial",sans-serif;
+  transition: all .1s ease-in-out .1s;
+}
+#bottomSheet.active {
+  opacity: 1;
+  z-index: 105;
+}
+#bottomSheetRuler {
+  border: 2px solid var(--primary);
+  height: 0;
+  width: 35px;
+  border-radius: 4px;
+  margin: 10px auto;
+  opacity: 0.15;
+}
+#bottomSheetItems {
+  display: flex;
+  flex-direction: column;
+  margin: 12px;
+}
+#bottomSheetItems > div {
+  margin: 10px 0;
+}
+#week {
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  font-family: monospace;
+  font-size: 1rem;
+}
+#week > span:first-of-type, #week > span:last-of-type {
+  margin: 0 15px;
+  font-size: 2rem;
+  opacity: 0.5;
+  transition: all .1s ease-in-out;
+}
+#week > span:nth-child(3) {
+  background: var(--primary);
+  padding: 4px;
+  margin: 0 0 0 4px;
+  color: var(--secondary);
+  font-size: 1.25rem;
+}
+/* RESPONSIVE ______________________________________ */
+@media screen and (min-width: 500px ) {
+  #bottomSheet {
+    width: inherit;
+    left: auto;
+    right: auto;
+  }
+}

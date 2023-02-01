@@ -1,7 +1,8 @@
 import HeaderStyles from './Header.module.css'
 import { week } from '../../lib/constants.js'
+import Menu from '../menu/Menu'
 
-const Header = ({ weekNb, date, activeDay, dayEvent }) => {
+const Header = ({ weekNb, date, activeDay, dayEvent, previous, next }) => {
   let dayTagEN = date.split(' ')[0]
   let dayTagFR
   week.forEach((el) => {
@@ -12,13 +13,10 @@ const Header = ({ weekNb, date, activeDay, dayEvent }) => {
 
   return (
     <>
+      <Menu weekNb={weekNb} previous={previous} next={next} />
       <header key={date}>
         <div className='spacer'></div>
         <section id={HeaderStyles.calendar}>
-          <div>        
-            <span>semaine </span>
-            <span>{weekNb}</span>
-          </div>
           <div>{dayTagFR}</div>
           <div>
             <span></span>
