@@ -6,18 +6,17 @@ import { fileTypeFromFile } from 'file-type'
 /**
  * 1. 'config' object is used to configure the behavior of the serverless function
  * 2. 'api.bodyParser' option is used to disable the built-in body parser.
- * 3.When this option is set to false, you will need to handle the incoming request data manually.
+ * 3. When this option is set to false, you will need to handle the incoming request data manually.
  */
 export const config = {
   api: {
     bodyParser: false
   }
 }
-
 // Serverless function
-export default (req, res) => {
+export default function handler (req, res) {
   let form = new formidable.IncomingForm()
-  form.uploadDir = path.join(process.cwd(), 'public/xlsFiles')
+  form.uploadDir = path.join(process.cwd(), 'public', 'xlsFiles')
 
   // File processing method
   form.parse(req, async function (err, fields, files) {

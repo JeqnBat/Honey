@@ -1,16 +1,16 @@
-import GlobalStyles from './Global.module.css'
+import HomeGridStyles from './HomeGrid.module.css'
 
-const Global = ({ names, event}) => {
+const AllTeam = ({ names, event}) => {
   return (
     <>
-      <div id={GlobalStyles.pick}>
+      <div id={HomeGridStyles.pick}>
         {names.map(el => (
           el.shift.dayAtWork ?
           <div
             key={el.index}
             data={el.index}
             name={el.name}
-            className={[el.shift.morning ? GlobalStyles.morning : GlobalStyles.eve, GlobalStyles.details].join(' ')}
+            className={[el.shift.morning ? HomeGridStyles.morning : HomeGridStyles.eve, HomeGridStyles.details].join(' ')}
             onClick={event}
           >
             <div className='spacinho'></div>
@@ -25,4 +25,4 @@ const Global = ({ names, event}) => {
   )
 }
 
-export default Global
+export default AllTeam

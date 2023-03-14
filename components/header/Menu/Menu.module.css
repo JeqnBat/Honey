@@ -1,18 +1,6 @@
 /**
  * MENU.MODULE.CSS
  */
-#menu {
-  position: fixed;
-  top: 0px;
-  padding: 0;
-  margin: 0;
-  width: inherit;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--secondary);
-  z-index: 12;
-}
 #menu > #button {
   display: flex;
   flex-direction: column;
@@ -36,15 +24,15 @@
 #overlay {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  visibility: hidden;
   background: black;
   opacity: 0;
-  height: inherit;
+  height: 100vh;
   transition: all .1s ease-in-out .1s;
 }
 #overlay.active {
-  z-index: 100;
-  opacity: 0.6;
+  visibility: visible;
+  opacity: 0.75;
 }
 #bottomSheet {
   background: var(--secondary);
@@ -56,6 +44,7 @@
   left: 0;
   right: 0;
   opacity: 0;
+  min-height: 25vh;
   z-index: -1;
   font-family: "Roboto","Arial",sans-serif;
   transition: all .1s ease-in-out .1s;
@@ -80,30 +69,10 @@
 #bottomSheetItems > div {
   margin: 10px 0;
 }
-#week {
-  display: flex;
-  align-items: center;
-  text-transform: uppercase;
-  font-family: monospace;
-  font-size: 1rem;
-}
-#week > span:first-of-type, #week > span:last-of-type {
-  margin: 0 15px;
-  font-size: 2rem;
-  opacity: 0.5;
-  transition: all .1s ease-in-out;
-}
-#week > span:nth-child(3) {
-  background: var(--primary);
-  padding: 4px;
-  margin: 0 0 0 4px;
-  color: var(--secondary);
-  font-size: 1.25rem;
-}
 /* RESPONSIVE ______________________________________ */
 @media screen and (min-width: 500px ) {
   #bottomSheet {
-    width: inherit;
+    width: 480px;
     left: auto;
     right: auto;
   }

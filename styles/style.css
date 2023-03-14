@@ -44,11 +44,6 @@ body.overlay-active {
   font-family: var(--body-font);
   width: 100vw;
 }
-#container > header {
-  width: 100%;
-  /* fit the position fixed menu */
-  margin-top: 50px;
-}
 .spacer {
   width: auto;
   height: 30px;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import MenuStyles from './Menu.module.css'
-import Logo from '../logo/Logo'
+import UploadFile from '../../UploadFile/UploadFile'
 
-const Menu = ({ weekNb, previous, next }) => {
+const Menu = () => {
   const [active, setActive] = useState(false)
 
   const handleClick = (e) => {
@@ -11,10 +11,23 @@ const Menu = ({ weekNb, previous, next }) => {
 
   return (
     <>
+      <menu id={MenuStyles.menu}>
+        <div
+          id={MenuStyles.button}
+          className={active ? MenuStyles.active : ''}
+          onClick={handleClick}
+        >
+          <div className={MenuStyles.dot}></div>
+          <div className={MenuStyles.dot}></div>
+          <div className={MenuStyles.dot}></div>
+        </div>
+      </menu>
+
       <div id={MenuStyles.overlay}
         onClick={handleClick}
         className={active ? MenuStyles.active : ''}
       >
+        <UploadFile />
       </div>
       <div 
         id={MenuStyles.bottomSheet}
@@ -26,24 +39,6 @@ const Menu = ({ weekNb, previous, next }) => {
           <div>b</div>
         </div>
       </div>
-      <menu id={MenuStyles.menu}>
-        <Logo />
-        <div id={MenuStyles.week}>
-          <span onClick={previous}>‹</span> 
-          <span>semaine</span>
-          <span>#{weekNb}</span>
-          <span onClick={next}>›</span>
-        </div>
-        <div
-          id={MenuStyles.button}
-          className={active ? MenuStyles.active : ''}
-          onClick={handleClick}
-        >
-          <div className={MenuStyles.dot}></div>
-          <div className={MenuStyles.dot}></div>
-          <div className={MenuStyles.dot}></div>
-        </div>
-      </menu>
     </>
   )
 }

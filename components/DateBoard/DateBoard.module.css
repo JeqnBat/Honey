@@ -1,0 +1,70 @@
+/**
+ * DATEBOARD.MODULE.CSS
+ */
+ #container {
+  width: 60%;
+ }
+ #calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 20px;
+  margin: 0 auto;
+  font-size: 2.5rem;
+  border-radius: 8px;
+  color: var(--secondary);
+  background: var(--primary);
+}
+#calendar > div:first-child {
+  position: relative;
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 10px;
+  animation: 200s ease-in-out fade-in;
+}
+#calendar > div:first-child::after {
+  position: absolute;
+  top: 100%;
+  left: 25%;
+  width: 50%;
+  content: ' ';
+  border-bottom: 2px solid var(--secondary);
+}
+#calendar > div:nth-child(2) {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  font-size: 1.25rem;
+  animation: 200s ease-in-out fade-in;
+}
+#week {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+#week > span {
+  font-family: monospace;
+  font-size: 1rem;
+  text-align: center;
+  padding: 15px 0;
+  text-transform: uppercase;
+  border-radius: 15px;
+  width: 100%;
+  transition: all .1s ease-in-out;
+}
+.active {
+  background: var(--primary);
+  color: var(--secondary);
+}
+
+/* ANIMATIONS ___________________________________ */
+@-webkit-keyframes fade-in {
+  0% { opacity: 0; }
+  .1% { opacity: 1; }
+}
+@keyframes fade-in {
+  0% { opacity: 0; }
+  .1% { opacity: 1; }
+}

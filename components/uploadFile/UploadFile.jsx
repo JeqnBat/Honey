@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import Styles from './Upload.module.css'
 
-function UploadFile() {
+const UploadFile = () => {
   const [file, setFile] = useState(null)
   const [loading, setLoading] = useState(false)
   const [response, setResponse] = useState(null)
