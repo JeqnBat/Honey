@@ -1,10 +1,7 @@
 import DateBoardStyles from './DateBoard.module.css'
 import { week } from '../../lib/constants.js'
-import { useStoreState, useStoreActions } from 'easy-peasy'
 
 const DateBoard = ({ date, activeDay, dayEvent }) => {
-  const test = useStoreState((state) => state.test)
-
   let dayTagEN = date.split(' ')[0]
   let dayTagFR
 
@@ -23,7 +20,6 @@ const DateBoard = ({ date, activeDay, dayEvent }) => {
         <div id={DateBoardStyles.calendar}>
           <div>{dayTagFR}</div>
           <div>
-            <span>{test}</span>
             <span>{date.split(' ')[1]}</span>
             <span>{date.split(' ')[2]}</span>
             <span>{date.split(' ')[3]}</span>

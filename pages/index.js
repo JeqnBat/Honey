@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useStoreActions } from 'easy-peasy'
+import { useStoreActions, useStoreState } from 'easy-peasy'
 import { parser, dayPicker, findDay, findNames } from '../lib/logic.js'
 import Loading from '../components/Loading/Loading'
 import Header from '/components/Header/Header'
@@ -8,97 +8,61 @@ import DateBoard from '../components/DateBoard/DateBoard'
 
 const Home = () => {
   // Global state logic
-  // const { appData, responsive, loaded } = useStoreState(state => ({
-  //   appData: state.appData,
-  //   responsive: state.responsive,
-  //   loaded: state.loaded.homePage
-  // }))
-  const { hydrate } = useStoreActions(actions => ({
+  const { app } = useStoreState(state => ({
+    app: state.app
+  }))
+  const { hydrate, update } = useStoreActions(actions => ({
     hydrate: actions.hydrate,
+    update: actions.update
   }))
 
   // Local state logic
-  const [app, setApp] = useState({
-    data: null,
-    weekNb: null,
-    currentWeek: null,
-    dayTag: null,
-    dayIndex: null,
-    fullDate: null,
-    employees: null,
-    employee: null,
-    status: 'loading'
-  })
+  // const [app, setApp] = useState({
+  //   data: null,
+  //   weekNb: null,
+  //   currentWeek: null,
+  //   dayTag: null,
+  //   dayIndex: null,
+  //   fullDate: null,
+  //   employees: null,
+  //   employee: null,
+  //   status: 'loading'
+  // })
 
-  const init = async () => {
-    const today = new Date()
+  // const init = async () => {
+  //   const today = new Date()
     
-    app.data = await parser()
-    app.weekNb = today.getWeek()
-    app.currentWeek = app.weekNb
-    app.dayTag = dayPicker()
-    app.day = findDay(app.dayTag, app.data[`S${app.currentWeek}`])
-    app.dayIndex = app.day.index
-    app.fullDate = app.day.fullDate
-    app.employees = findNames(app.dayIndex, app.data[`S${app.currentWeek}`])
+  //   app.data = await parser()
+  //   app.weekNb = today.getWeek()
+  //   app.currentWeek = app.weekNb
+  //   app.dayTag = dayPicker()
+  //   app.day = findDay(app.dayTag, app.data[`S${app.currentWeek}`])
+  //   app.dayIndex = app.day.index
+  //   app.fullDate = app.day.fullDate
+  //   app.employees = findNames(app.dayIndex, app.data[`S${app.currentWeek}`])
 
-    setApp({
-      ...app,
-      status: 'home'
-    })
-  }
+  //   setApp({
+  //     ...app,
+  //     status: 'home'
+  //   })
+  // }
   /* USE EFFECT HOOKS _______________________________________ */
   useEffect(() => {
-    init()
+    // init()
     hydrate()
+    fetch('/api/getData')
+      .then(response => response.json())
+      .then(data => console.log(data))
   }, [])
-  useEffect(() => {
-    // Prevent bug on first load because DATA has not been fetched & cant be displayed yet
-    if (app.status !== 'loading') {
-      app.day = findDay(app.dayTag, app.data[`S${app.currentWeek}`])
-      app.dayIndex = app.day.index
-      app.fullDate = app.day.fullDate
-      app.employees = findNames(app.dayIndex, app.data[`S${app.currentWeek}`])
-      setApp({
-        ...app
-      })
-    }
-  }, [app.dayTag])
 
   /* ALL EVENTS _____________________________________________ */
   const events = (e, type) => {
     switch (type) {
       case 'dayClick':
-        setApp({
+        update({
           ...app,
           dayTag: e.target.getAttribute('tag')
         })
-        break
-      case 'backArrowClick':
-        setApp({
-          ...app,
-          status: 'home'
-        })
-        break
-      case 'previous':
-        if (app.currentWeek - 1 > 0) {
-          setApp({
-            ...app,
-            currentWeek: app.currentWeek - 1
-          })
-        } else {
-          return
-        }
-        break
-      case 'next':
-        if (app.currentWeek + 1 <= app.weekNb) {
-          setApp({
-            ...app,
-            currentWeek: app.currentWeek + 1 
-          })
-        } else {
-          return
-        }
         break
       default:
         return
@@ -118,8 +82,6 @@ const Home = () => {
           <Header
             date={app.fullDate}
             weekNb={app.currentWeek}
-            previous={(e) => events(e, 'previous')}
-            next={(e) => events(e, 'next')}
           />
           <DateBoard
             date={app.fullDate}
