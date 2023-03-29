@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useStoreActions, useStoreState } from 'easy-peasy'
-import { parser, dayPicker, findDay, findNames } from '../lib/logic.js'
+import { parser } from '../lib/logic'
+/* components */
 import Loading from '../components/Loading/Loading'
 import Header from '/components/Header/Header'
 import HomeGrid from '../components/HomeGrid/HomeGrid'
 import DateBoard from '../components/DateBoard/DateBoard'
+import UploadFile from '../components/UploadFile/UploadFile'
 
 const Home = () => {
-  // Global state logic
+  /* COMPOENTS LOGIC ________________________________________ */
+  const [pageStatus, setPageStatus] = useState('loading')
+
+  /* GLOBAL STATE LOGIC _____________________________________ */
   const { app } = useStoreState(state => ({
     app: state.app
   }))
@@ -15,44 +20,12 @@ const Home = () => {
     hydrate: actions.hydrate,
     update: actions.update
   }))
-
-  // Local state logic
-  // const [app, setApp] = useState({
-  //   data: null,
-  //   weekNb: null,
-  //   currentWeek: null,
-  //   dayTag: null,
-  //   dayIndex: null,
-  //   fullDate: null,
-  //   employees: null,
-  //   employee: null,
-  //   status: 'loading'
-  // })
-
-  // const init = async () => {
-  //   const today = new Date()
-    
-  //   app.data = await parser()
-  //   app.weekNb = today.getWeek()
-  //   app.currentWeek = app.weekNb
-  //   app.dayTag = dayPicker()
-  //   app.day = findDay(app.dayTag, app.data[`S${app.currentWeek}`])
-  //   app.dayIndex = app.day.index
-  //   app.fullDate = app.day.fullDate
-  //   app.employees = findNames(app.dayIndex, app.data[`S${app.currentWeek}`])
-
-  //   setApp({
-  //     ...app,
-  //     status: 'home'
-  //   })
-  // }
   /* USE EFFECT HOOKS _______________________________________ */
   useEffect(() => {
-    // init()
     hydrate()
-    fetch('/api/getData')
-      .then(response => response.json())
-      .then(data => console.log(data))
+    // checks if there are files inside "public/xlsFiles"
+    fetch('api/update')
+      .then((res) => {res.status === 200 ? setPageStatus('home') : setPageStatus('files missing')})
   }, [])
 
   /* ALL EVENTS _____________________________________________ */
@@ -68,14 +41,27 @@ const Home = () => {
         return
     }
   }
-  /* ALL RETURNS ____________________________________________ */
-  /**
-   * <b>DESCR:</b><br>
-   * SWITCH pour afficher les différentes pages plutôt qu'un component dédié
-   */
-  switch (app.status) {
+  /* PAGE STATUS & CONDITIONAL RETURNS ______________________ */
+  switch (pageStatus) {
     case 'loading':
       return <Loading />
+    case 'files missing':
+      return (
+        <div id='container'>
+          <Header
+            date={app.fullDate}
+            weekNb={app.currentWeek}
+          />
+          <DateBoard
+            date={app.fullDate}
+            activeDay={app.dayTag}
+            dayEvent={(e) => events(e, 'dayClick')}
+          />
+          <UploadFile 
+            pageStatus={pageStatus}
+          />
+        </div>
+      )
     case 'home':
       return (
         <div id='container'>
@@ -92,6 +78,7 @@ const Home = () => {
             names={app.employees} 
             event={(e) => console.log(e)} 
           />
+          <p>homegrid</p>
         </div>
       )
     case 'soloInterface':

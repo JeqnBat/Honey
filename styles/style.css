@@ -50,10 +50,13 @@ body.overlay-active {
 }
 .spacinho {
   width: auto;
-  height: 1px;
+  height: 10px;
 }
 .hide {
   display: none;
+}
+.invisible {
+  visibility: hidden;
 }
 /* CUSTOM FONTS ____________________________________ */
 @font-face {

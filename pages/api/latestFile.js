@@ -1,11 +1,10 @@
 import path from 'path'
 import fs from 'fs'
-
 // La fonction est async pour permettre d'attendre fs.promises.readdir(dirPath)
 // sinon je dois entrer la suite du code dans la méthode readdir et confiner
 // les res.status(200) dans le scope de la fonction ce qui bloque la réponse
 // de l'API et l'empêche de fonctionner.
-export default async function handler (req, res) {
+export default async function handler(req, res) {
   try {
     // CWD = Current Working Directory; ici la root de l'app
     // avec join(), chaque argument représente un subfolder

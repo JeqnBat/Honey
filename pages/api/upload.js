@@ -41,11 +41,11 @@ export default function handler (req, res) {
         if (err) throw err
         console.log(`${oldpath} was deleted`)
       })
-      return res.status(400).json({ message: 'Wrong file type' })
+      return res.status(400).json({ message: 'Le fichier n\'a pas la bonne extension' })
     // else if file is of type 'xlsm'
     } else {
       fs.rename(oldpath, newpath, function (err) {
-        return res.status(200).json({ message: 'File uploaded and moved!' })
+        return res.status(200).json({ message: 'Le fichier a bien été envoyé !' })
       })
     }
   })
