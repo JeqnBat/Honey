@@ -29,12 +29,9 @@ html, body {
   justify-content: center;
   background: var(--secondary);
 }
-body.overlay-active {
-  overflow: hidden;
-}
 #container {
   position: relative;
-  background: var(--secondary);
+  background: linear-gradient(black, var(--secondary) 5%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -43,6 +40,16 @@ body.overlay-active {
   color: var(--primary);
   font-family: var(--body-font);
   width: 100vw;
+}
+main {
+  background: var(--secondary);
+  z-index: 10;
+  width: 100%;
+  min-height: 300px;
+  transition: all .3s ease-in-out .1s;
+}
+main.single-view {
+  transform: translateY(-160px);
 }
 .spacer {
   width: auto;

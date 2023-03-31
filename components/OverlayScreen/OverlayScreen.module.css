@@ -1,0 +1,17 @@
+/** 
+ * @OVERLAYSCREEN.MODULE.CSS
+ */
+#overlay {
+  position: fixed;
+  inset: 0;
+  visibility: hidden;
+  background: black;
+  opacity: 0;
+  height: 100vh;
+  transition: all .1s ease-in-out;
+}
+#overlay.active {
+  visibility: visible;
+  opacity: 0.75;
+  z-index: 1000;
+}

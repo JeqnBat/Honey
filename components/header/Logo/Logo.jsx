@@ -1,21 +1,19 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { useStoreActions } from 'easy-peasy'
 import LogoStyles from './Logo.module.css'
 
 const Logo = () => {
-  const router = useRouter()
+  const { updateStatus } = useStoreActions(actions => ({
+    updateStatus: actions.updateStatus
+  }))
 
-  const handleClick = (e) => {
-    e.preventDefault()
-    router.push('/')
+  const handleClick = () => {
+    updateStatus('home')
   }
   
   return (
-    <Link href='/'>
-      <div id={LogoStyles.logo}>
-        <span onClick={(e) => handleClick(e)}>Honey</span>
-      </div>
-    </Link>
+    <div id={LogoStyles.logo}>
+      <span onClick={(e) => handleClick(e)}>Honey</span>
+    </div>
   )
 }
 

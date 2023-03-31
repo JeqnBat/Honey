@@ -10,6 +10,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--secondary);
-  z-index: 12;
+  background: linear-gradient(transparent, var(--secondary) 30%);
+  z-index: 1;
+  transition: all .1s ease-in-out;
+}
+#header.active {
+  z-index: 1000;
+  background: black;
 }

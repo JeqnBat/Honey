@@ -1,0 +1,23 @@
+/**
+ * @WEEKBOARD.MODULE.CSS
+ */
+#week {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+#week > span {
+  font-family: monospace;
+  font-size: 1rem;
+  text-align: center;
+  padding: 15px 0;
+  text-transform: uppercase;
+  border-radius: 15px;
+  width: 100%;
+  transition: all .1s ease-in-out;
+}
+.active {
+  background: var(--primary);
+  color: var(--secondary);
+}

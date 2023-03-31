@@ -1,6 +1,9 @@
 /**
  * MENU.MODULE.CSS
  */
+#menu {
+  padding: 0;
+}
 #menu > #button {
   display: flex;
   flex-direction: column;
@@ -38,20 +41,17 @@
   background: var(--secondary);
   border-radius: 10px;
   position: fixed;
-  z-index: 200;
   margin: 0 8px 24px;
   bottom: 0;
   left: 0;
   right: 0;
   opacity: 0;
   min-height: 25vh;
-  z-index: -1;
   font-family: "Roboto","Arial",sans-serif;
-  transition: all .1s ease-in-out .1s;
+  transition: all .1s ease-in-out;
 }
 #bottomSheet.active {
   opacity: 1;
-  z-index: 105;
 }
 #bottomSheetRuler {
   border: 2px solid var(--primary);

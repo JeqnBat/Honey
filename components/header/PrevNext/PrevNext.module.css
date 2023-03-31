@@ -13,6 +13,10 @@
   font-size: 2rem;
   opacity: 0.5;
   transition: all .1s ease-in-out;
+  cursor: pointer;
+}
+#week > span:first-of-type:active, #week > span:last-of-type:active {
+  background: grey
 }
 #week > span:nth-child(3) {
   background: var(--primary);

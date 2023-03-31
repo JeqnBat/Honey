@@ -1,24 +1,19 @@
-import { week } from '../../lib/constants.js'
 import Logo from './Logo/Logo'
 import PrevNext from './PrevNext/PrevNext'
 import Menu from './Menu/Menu'
 import HeaderStyles from './Header.module.css'
+import { useStoreState } from 'easy-peasy'
 
-const Header = ({ weekNb, date, previous, next }) => {
-  let dayTagEN = date.split(' ')[0]
-  let dayTagFR
-
-  week.forEach((el) => {
-    if (el.tagEN === dayTagEN) {
-      dayTagFR = el.name
-    }
-  })
-
+const Header = () => {
+  const { active } = useStoreState(state => ({ active: state.active }))
+  
   return (
-    <header id={HeaderStyles.header}>
+    <header 
+      className={active ? HeaderStyles.active : ''}
+      id={HeaderStyles.header}>
       <Logo />
       <PrevNext />
-      <Menu weekNb={weekNb} previous={previous} next={next} />
+      <Menu />
     </header>
   )
 }

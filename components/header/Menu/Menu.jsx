@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import { useStoreState, useStoreActions } from 'easy-peasy'
 import MenuStyles from './Menu.module.css'
 import UploadFile from '../../UploadFile/UploadFile'
 
 const Menu = () => {
-  const [active, setActive] = useState(false)
-
-  const handleClick = (e) => {
-    setActive(!active)
+  const { active } = useStoreState(state => ({
+    active: state.active
+  }))
+  const { toggleActive } = useStoreActions(actions => ({
+    toggleActive: actions.toggleActive
+  }))
+  const handleClick = () => {
+    toggleActive(!active)
   }
 
   return (
@@ -22,13 +26,6 @@ const Menu = () => {
           <div className={MenuStyles.dot}></div>
         </div>
       </menu>
-
-      <div id={MenuStyles.overlay}
-        onClick={handleClick}
-        className={active ? MenuStyles.active : ''}
-      >
-        <UploadFile />
-      </div>
       <div 
         id={MenuStyles.bottomSheet}
         className={active ? MenuStyles.active : ''}
@@ -37,6 +34,7 @@ const Menu = () => {
         <div id={MenuStyles.bottomSheetItems}>
           <div>a</div>
           <div>b</div>
+          <UploadFile />
         </div>
       </div>
     </>
