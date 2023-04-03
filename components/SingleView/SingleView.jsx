@@ -1,12 +1,18 @@
 import React from 'react'
 import SingleViewStyles from './SingleView.module.css'
 import { useStoreState } from 'easy-peasy'
+import { useEffect, useState } from 'react'
 
 const SingleView = () => {
   const { employees, name } = useStoreState(state => ({
     employees: state.employees,
     name: state.activeEmployeeName
   }))
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
   /* trim() = bug fixer; ex "Jean " instead of "Jean" */
   const activeEmployee = employees.find(el => el.name.trim() === name)
   const { dayAtWork, duration, ends, morning, starts } = activeEmployee.shift
@@ -19,7 +25,9 @@ const SingleView = () => {
     const fStarts = format2.test(starts) ? starts.replace('h', '.') : starts.replace('h', '')
 
     return (
-      <section id={SingleViewStyles.wrapper}>
+      <section 
+        className={`${SingleViewStyles.fade} ${mounted ? SingleViewStyles.isMounted : ''}`}
+        id={SingleViewStyles.wrapper}>
         <div className='spacer'></div>
         <div className='spacer'></div>
         <div className={SingleViewStyles.portrait}>
@@ -53,7 +61,10 @@ const SingleView = () => {
     )
   } else {
     return (    
-      <section id={SingleViewStyles.wrapper}>
+      <section 
+        id={SingleViewStyles.wrapper}
+        className={`${SingleViewStyles.fade} ${mounted ? SingleViewStyles.isMounted : ''}`}
+      >
         <div className='spacer'></div>
         <div className='spacer'></div>
         <div className={SingleViewStyles.portrait}>

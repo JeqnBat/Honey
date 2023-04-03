@@ -6,8 +6,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.isMounted {
+  opacity: 1!important;
+}
+#wrapper.fade {
   opacity: 0;
-  animation: 400s ease-in-out .4s fade;
+  transition: all .3s ease-in-out .2s;
 }
 #wrapper > .portrait {
   display: flex;
