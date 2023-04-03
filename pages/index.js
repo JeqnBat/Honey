@@ -56,13 +56,11 @@ const Home = () => {
         <OverlayScreen />
         <Header />
         <div className='spacer'></div>
-        <div className='spacer'></div>
-        <div className='spacer'></div>
         <DateBoard />
         <div className='spacer'></div>
         <main>
           <WeekBoard />
-          <div className='spacinho'></div>
+          <div className='spacer'></div>
           <EmployeeOverview />
         </main>
       </div>
@@ -72,8 +70,6 @@ const Home = () => {
       <div id='container'>
         <OverlayScreen />
         <Header />
-        <div className='spacer'></div>
-        <div className='spacer'></div>
         <div className='spacer'></div>
         <DateBoard />
         <div className='spacer'></div>

@@ -5,12 +5,12 @@ const EmployeeOverview = () => {
   const { names } = useStoreState(state => ({
     names: state.employees
   }))
-  const { updateStatus, selectEmployeeIdx } = useStoreActions(actions => ({
+  const { updateStatus, setEmployeeName } = useStoreActions(actions => ({
     updateStatus: actions.updateStatus,
-    selectEmployeeIdx: actions.selectEmployeeIdx
+    setEmployeeName: actions.setEmployeeName
   }))
   const handleClick = (e) => {
-    selectEmployeeIdx(e.target.getAttribute('data'))
+    setEmployeeName(e.target.getAttribute('name'))
     updateStatus('single view')
   }
 
@@ -21,14 +21,15 @@ const EmployeeOverview = () => {
           el.shift.dayAtWork ?
           <div
             key={el.index}
-            data={el.index}
-            name={el.name}
             className={[el.shift.morning ? EmployeeOverviewStyles.morning : EmployeeOverviewStyles.eve, EmployeeOverviewStyles.details].join(' ')}
             onClick={handleClick}
           >
-            <div data={el.index} className='spacinho'></div>
-            <h3 data={el.index}>{el.name}</h3>
-            <h4 data={el.index}>{el.shift.starts} - {el.shift.ends}</h4>
+            <div className='spacinho'></div>
+            <h3>{el.name}</h3>
+            <h4>{el.shift.starts} - {el.shift.ends}</h4>
+            
+            {/*catch name upon clicking*/}
+            <div name={el.name}></div>
           </div>
           :
           <div className='hide' key={el.index}></div>

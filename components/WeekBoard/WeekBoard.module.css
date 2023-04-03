@@ -7,17 +7,26 @@
   width: 100%;
   justify-content: space-between;
 }
-#week > span {
-  font-family: monospace;
+#week > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   font-size: 1rem;
-  text-align: center;
   padding: 15px 0;
   text-transform: uppercase;
   border-radius: 15px;
   width: 100%;
   transition: all .1s ease-in-out;
 }
-.active {
+#week > div > div:nth-child(3) {
+  font-size: 0.75rem;
+  opacity: .5;
+}
+#week > div.active {
   background: var(--primary);
   color: var(--secondary);
+}
+#week > div.active > div:nth-child(3){
+  opacity: 1;
 }

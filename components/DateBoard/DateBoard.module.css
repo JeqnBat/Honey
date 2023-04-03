@@ -24,6 +24,7 @@
 #calendar > div:first-child > hr {
   margin: 10px 60px;
   border-color: var(--secondary);
+  border-bottom: 0;
 }
 #calendar > div:nth-child(2) {
   display: flex;

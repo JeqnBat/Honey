@@ -33,6 +33,11 @@
   font-family: sans-serif;
   margin: 0;
 }
+.details > div:last-of-type {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
 .morning {
   position: relative;
   color: var(--secondary);

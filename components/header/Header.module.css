@@ -2,8 +2,6 @@
  * HEADER.MODULE.CSS
  */
 #header {
-  position: fixed;
-  top: 0px;
   padding: 0;
   margin: 0;
   width: inherit;

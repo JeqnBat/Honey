@@ -1,3 +1,69 @@
 /**
  * @SINGLEVIEW.MODULE.CSS
  */
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: 400s ease-in-out .4s fade;
+}
+#wrapper > .portrait {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 125px;
+  width: 125px;
+  border-radius: 63px;
+  background-color: var(--primary);
+  overflow: hidden;
+}
+#wrapper > .portrait > figure {
+  animation: .75s ease-in-out infinite fly;
+}
+#wrapper > .name {
+  width: 100%;
+  text-align: center;
+  font-size: 50px;
+  text-transform: capitalize;
+}
+#wrapper > #stats {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  width: 100%;
+}
+/* Columns */
+#wrapper > #stats > div {
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#wrapper > #stats > div > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 30px;
+}
+#wrapper > #stats > div > div:nth-child(odd) {
+  font-size: 12px;
+  opacity: 0.4;
+}
+#wrapper > #stats > div > div:nth-child(even) {
+  font-size: 24px;
+}
+/* ANIMATIONS _____________________________________________ */
+@keyframes fly {
+  0% { transform: translateY(2px); }
+  50% { transform: translateY(-2px); }
+  100% { transform: translateY(2px); }
+}
+@keyframes fade {
+  0% { opacity: 0; }
+  0.1% { opacity: 1; }
+  100% { opacity: 1; }
+}
