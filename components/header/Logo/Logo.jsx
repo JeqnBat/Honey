@@ -1,15 +1,11 @@
-import { useStoreActions } from 'easy-peasy'
 import LogoStyles from './Logo.module.css'
+import { useStoreActions } from 'easy-peasy'
 
 const Logo = () => {
-  const { updateStatus, setEmployeeName } = useStoreActions(actions => ({
-    updateStatus: actions.updateStatus,
-    setEmployeeName: actions.setEmployeeName
-  }))
+  const { setState } = useStoreActions(actions => ({ setState: actions.setState }))
 
   const handleClick = () => {
-    updateStatus('home')
-    setEmployeeName(null)
+    setState({ status: 'home', activeEmployeeName: null })
   }
   
   return (

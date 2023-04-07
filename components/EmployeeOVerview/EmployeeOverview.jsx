@@ -2,16 +2,11 @@ import EmployeeOverviewStyles from './EmployeeOverview.module.css'
 import { useStoreState, useStoreActions } from 'easy-peasy'
 
 const EmployeeOverview = () => {
-  const { names } = useStoreState(state => ({
-    names: state.employees
-  }))
-  const { updateStatus, setEmployeeName } = useStoreActions(actions => ({
-    updateStatus: actions.updateStatus,
-    setEmployeeName: actions.setEmployeeName
-  }))
+  const { names } = useStoreState(state => ({ names: state.employees }))
+  const { setState } = useStoreActions(actions => ({ setState: actions.setState }))
+
   const handleClick = (e) => {
-    setEmployeeName(e.target.getAttribute('name'))
-    updateStatus('single view')
+    setState({ activeEmployeeName : e.target.getAttribute('name'), status: 'single view'})
   }
 
   const morningShifts = names.filter((el) => el.shift.morning === true && el.shift.dayAtWork === true)

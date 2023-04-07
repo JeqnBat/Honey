@@ -1,0 +1,22 @@
+/**
+ * @SUCCESS.MODULE.CSS
+ */
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+#wrapper > #success > img {
+  height: 70px;
+}
+#wrapper > #success {
+  position: relative;
+  overflow: hidden;
+  border-radius: 35px;
+  height: 70px;
+}
+#wrapper > div:last-of-type {
+  padding: 10px 0 0 0;
+}

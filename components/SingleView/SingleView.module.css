@@ -33,6 +33,12 @@
   font-size: 50px;
   text-transform: capitalize;
 }
+/* RIP message */
+#rip {
+  text-align: center;
+  margin: 20px;
+}
+/* PERSONAL STATS COMPONENT'S STYLE */
 #wrapper > #stats {
   display: flex;
   align-items: flex-start;

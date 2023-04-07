@@ -1,6 +1,13 @@
 /**
  * UPLOAD.MODULE.CSS
  */
+#wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 #wrapper > form {
   display: flex;
   flex-direction: column;

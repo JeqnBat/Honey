@@ -31,7 +31,6 @@ html, body {
 }
 #container {
   position: relative;
-  background: linear-gradient(black, var(--secondary) 5%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;

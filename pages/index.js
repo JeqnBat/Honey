@@ -1,6 +1,3 @@
-import React, { useEffect } from 'react'
-import { useStoreActions, useStoreState } from 'easy-peasy'
-/* components */
 import Loading from '../components/Loading/Loading'
 import Header from '/components/Header/Header'
 import DateBoard from '../components/DateBoard/DateBoard'
@@ -8,32 +5,36 @@ import WeekBoard from '../components/WeekBoard/WeekBoard'
 import EmployeeOverview from '../components/EmployeeOverview/EmployeeOverview'
 import SingleView from '../components/SingleView/SingleView'
 import UploadFile from '../components/UploadFile/UploadFile'
-import OverlayScreen from '../components/OverlayScreen/OverlayScreen'
+import InfoBoard from '../components/InfoBoard/InfoBoard'
+import React, { useEffect } from 'react'
+import { useStoreActions, useStoreState } from 'easy-peasy'
 
-const Home = () => {
+const Index = () => {
   /* GLOBAL STATE LOGIC _____________________________________ */
-  const { app } = useStoreState(state => ({ app: state }))
-  const { init, updateStatus } = useStoreActions(actions => ({
+  const { status } = useStoreState(state => ({ status: state.status }))
+  const { init, setState } = useStoreActions(actions => ({
     init: actions.init,
-    updateStatus: actions.updateStatus
+    setState: actions.setState
   }))
   /* USE EFFECT HOOKS _______________________________________ */
   useEffect(() => {
     async function fetchData() {
       try {
-        const update = await fetch('api/update')
-        const status = await update.status
+        const update = await fetch('./api/update')
+        const response = update.status
         // checks if "public/xlsFiles" is empty
-        if (status !== 200) {
-          updateStatus('files missing')
+        if (response !== 200) {
+          setState({ status: 'files missing' })
         // if not
         } else {
-          const response = await fetch(`/api/hydrate`)
+          const weeks = await fetch(`./api/countWeeks`)
+          const { numberOfFiles } = await weeks.json()
+          const response = await fetch(`./api/loadSingleWeek`)
           const rawText = await response.text()
           const data = JSON.parse(rawText)
           
           init(data)
-          updateStatus('home')
+          setState({ status: 'home', numberOfWeeks: numberOfFiles })
         }
       } catch (msg) {
         console.error(msg)
@@ -42,49 +43,55 @@ const Home = () => {
     fetchData()
   }, [])
   /* PAGE STATUS & CONDITIONAL RETURNS ______________________ */
-  if (app.status === 'loading') {
-    return <Loading />
-  } else if (app.status === 'files missing') {
-    <div id='container'>
-      <Header />
-      <DateBoard />
-      <UploadFile />
-    </div>
-  } else if (app.status === 'home') {
-    return (
-      <div id='container'>
-        <OverlayScreen />
-        <Header />
-        <div className='spacer'></div>
-        <DateBoard />
-        <div className='spacer'></div>
-        <main>
-          <WeekBoard />
-          <div className='spacer'></div>
-          <EmployeeOverview />
-        </main>
-      </div>
-    )
-  } else if (app.status === 'single view') {
-    return (
-      <div id='container'>
-        <OverlayScreen />
-        <Header />
-        <div className='spacer'></div>
-        <DateBoard />
-        <div className='spacer'></div>
-        <main
-          className='single-view'
-        >
-          <WeekBoard />
-          <div className='spacinho'></div>
-          <SingleView />
-        </main>
-      </div>
-    )
-  } else {
-    return
-  }
+  return (
+    (() => {
+      switch (status) {
+        case 'loading':
+          return <Loading />
+        case 'files missing':
+          return (
+            <div id='container'>
+              <InfoBoard />
+              <Header />
+              <DateBoard />
+              <UploadFile />
+            </div>
+          )
+        case 'home':
+          return (
+            <div id='container'>
+              <InfoBoard />
+              <Header />
+              <div className='spacer'></div>
+              <DateBoard />
+              <div className='spacer'></div>
+              <main>
+                <WeekBoard />
+                <div className='spacer'></div>
+                <EmployeeOverview />
+              </main>
+            </div>
+          )
+        case 'single view':
+          return (
+            <div id='container'>
+              <InfoBoard />
+              <Header />
+              <div className='spacer'></div>
+              <DateBoard />
+              <div className='spacer'></div>
+              <main className='single-view'>
+                <WeekBoard />
+                <div className='spacinho'></div>
+                <SingleView />
+              </main>
+            </div>
+          )
+        default:
+          break
+      }
+    })()
+  )
 }
 
-export default Home
+export default Index

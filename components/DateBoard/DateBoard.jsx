@@ -3,7 +3,10 @@ import { week } from '../../lib/constants.js'
 import { useStoreState } from 'easy-peasy'
 
 const DateBoard = () => {
-  const { date } = useStoreState(state => ({ date: state.fullDate }))
+  const { date, status } = useStoreState(state => ({ 
+    date: state.fullDate,
+    status: state.status
+  }))
   // Tag names translation
   let dayTagEN = date.split(' ')[0]
   let dayTagFR
@@ -13,6 +16,11 @@ const DateBoard = () => {
     }
   })
 
+  if (status === 'files missing') {
+    return (
+    <></>
+    )
+  }
   return (
     <div id={DateBoardStyles.calendar}>
       <div>{dayTagFR}<hr></hr></div>

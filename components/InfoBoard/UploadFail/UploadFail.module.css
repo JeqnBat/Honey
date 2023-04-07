@@ -1,0 +1,17 @@
+/**
+ * @UPLOADFAIL.MODULE.CSS
+ */
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+#wrapper > #warning > img {
+  height: 70px;
+  opacity: 0.5;
+}
+#wrapper > div:last-of-type {
+  padding: 10px 0;
+}

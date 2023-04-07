@@ -1,0 +1,33 @@
+/**
+ * @WEEKSLIST.MODULE.CSS
+ */
+#main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-right: calc(100%/14);
+  padding-left: calc(100%/14);
+}
+#main > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+  height: 50px;
+  width: calc(100%/6.7);
+  border-radius: 20px;
+  color: var(--primary);
+  font-family: monospace;
+  font-size: 1rem;
+  background: var(--secondary);
+  border: 2px solid transparent;
+}
+#main > span.active {
+  color: var(--secondary);
+  background: var(--primary);
+  border: 2px solid var(--secondary);
+  font-weight: bold;
+}

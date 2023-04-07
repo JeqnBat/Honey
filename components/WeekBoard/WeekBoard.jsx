@@ -7,9 +7,7 @@ const WeekBoard = () => {
     activeDay: state.dayTag,
     weekDaysNb: state.weekDaysNb
   }))
-  const { updateActiveDay } = useStoreActions(actions => ({
-    updateActiveDay: actions.updateActiveDay
-  }))
+  const { updateActiveDay } = useStoreActions(actions => ({ updateActiveDay: actions.updateActiveDay }))
 
   const handleclick = (e) => {
     updateActiveDay(e.target.getAttribute('tag'))

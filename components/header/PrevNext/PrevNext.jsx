@@ -8,7 +8,7 @@ const PrevNext = () => {
   const handleClick = async (e) => {
     let weekIncrement = e.target.className === 'prev' ? state.displayedWeekNb - 1 : state.displayedWeekNb + 1
     // use hydrate API to fetch data from new week
-    const response = await fetch(`api/hydrate?weekNb=${ weekIncrement }`)
+    const response = await fetch(`./api/loadSingleWeek?weekNb=${ weekIncrement }`)
     // check if there is a file to fetch
     if (response.status === 400) {
       window.alert(
@@ -25,11 +25,20 @@ const PrevNext = () => {
         data: data
       })
     }
+  }
+
+  const handleChange = (e) => {
 
   }
 
   return (
     <div id={PrevNextStyles.week}>
+      <label htmlFor='mylist'>Select an VIK</label>
+      <select id='mylist' name='mylist' onChange={handleChange}>
+        <option value='option1'>Option 1</option>
+        <option value='option2'>Option 2</option>
+        <option value='option3'>Option 3</option>
+      </select>
       <span className='prev' onClick={handleClick}>‹</span> 
       <span>semaine</span>
       <span>#{state.displayedWeekNb}</span>

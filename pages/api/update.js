@@ -9,7 +9,10 @@ export default function update(req, res) {
   // Check if the folder is empty
   const folder = path.join(process.cwd(), 'public', 'xlsFiles')
   fs.readdir(folder, (err, files) => {
-    if (err) throw err
+    if (err) {
+      res.status(500).send('Error reading folder')
+      return
+    }
 
     if (files.length === 0) {
       res.status(404).send('Folder is empty')
@@ -17,4 +20,5 @@ export default function update(req, res) {
       res.status(200).send('Folder is not empty')
     }
   })
+
 }
