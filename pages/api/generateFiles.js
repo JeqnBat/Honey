@@ -4,10 +4,10 @@ import path from 'path'
 export default function generateFiles(req, res) {
   const { key, values } = req.body
 
-  if (req.method === "POST") {
+  if (req.method === 'POST') {
     try {
       const text = JSON.stringify(values)
-      const filePath = path.join(process.cwd(), "public", "weeks", `${key}.txt`)
+      const filePath = path.join(process.cwd(), 'public', 'weeks', `${key}.txt`)
 
       fs.writeFile(filePath, text, (err) => {
         if (err) {

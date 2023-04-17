@@ -2,6 +2,7 @@ import React from 'react'
 import SingleViewStyles from './SingleView.module.css'
 import PersonalStats from './PersonalStats/PersonalStats'
 import OffDay from './OffDay/OffDay'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useStoreState } from 'easy-peasy'
 
@@ -28,7 +29,7 @@ const SingleView = () => {
       >
         <div className='spacer'></div><div className='spacer'></div>
         <div className={SingleViewStyles.portrait}>
-          <figure><img src='./icons/bee.png' /></figure>
+          <figure><Image width='89' height='79' src='/icons/bee.png' alt='flying bee' /></figure>
         </div>
         <div className='spacer'></div>
         <div id={SingleViewStyles.rip}>Woops ! <br /> Il semble que cet équipier nous ait quittés…</div>
@@ -42,7 +43,7 @@ const SingleView = () => {
       >
         <div className='spacer'></div><div className='spacer'></div>
         <div className={SingleViewStyles.portrait}>
-          <figure><img src='./icons/bee.png' /></figure>
+          <figure><Image width='89' height='79' src='/icons/bee.png' alt='flying bee' /></figure>
         </div>
         <div className='spacer'></div>
         <div className={SingleViewStyles.name}>{name}</div>
@@ -58,7 +59,7 @@ const SingleView = () => {
       >
         <div className='spacer'></div><div className='spacer'></div>
         <div className={SingleViewStyles.portrait}>
-          <figure><img src='./icons/bee.png' /></figure>
+          <figure><Image width='89' height='79' src='/icons/bee.png' alt='flying bee' /></figure>
         </div>
         <div className='spacer'></div>
         <OffDay name={name} />

@@ -15,16 +15,17 @@
 #wrapper > form > label {
   margin: 20px;
 }
-#wrapper > form > label > img {
-  height: 50px;
-  opacity: 0.25;
-  width: 100%;
-  cursor: pointer;
-}
 #wrapper > form > label > input {
   display: none;
 }
 #wrapper > div:last-of-type {
   opacity: 0.9;
   font-size: .75rem;
+}
+/* For styling <Image /> elements, no cascading tree > > > */
+.FFFF {
+  height: 50px;
+  opacity: 0.25;
+  width: 100%;
+  cursor: pointer;
 }

@@ -8,7 +8,7 @@ const PersonalStats = ({ duration, ends, starts}) => {
 
   return (
     <>
-      <div>Aujourd'hui,</div>
+      <div>Aujourd&apos;hui,</div>
       <div className='spacer'></div>
       <div id={PersonalStatsStyles.stats}>
         <div>

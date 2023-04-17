@@ -1,13 +1,16 @@
 import OffDayStyles from './../SingleView.module.css'
+import Image from 'next/image'
 
 const OffDay = ({ name }) => {
   return (
     <>
       <div className={OffDayStyles.name}>{name}</div>
       <div className='spacer'></div>
-      <div>Aujourd'hui,</div>
+      <div>Aujourd&apos;hui,</div>
       <div className='spacer'></div>
-      <figure><img src='./icons/sleepingCat.png' /></figure>
+      <figure>
+        <Image width='150' height='150' src='/icons/sleepingCat.png' alt='sleeping cat' />
+      </figure>
       <div>Repose-toi bien !</div>
     </>
   )

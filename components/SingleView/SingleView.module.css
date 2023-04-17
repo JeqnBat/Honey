@@ -25,6 +25,7 @@
   overflow: hidden;
 }
 #wrapper > .portrait > figure {
+  margin: 0;
   animation: .75s ease-in-out infinite fly;
 }
 #wrapper > .name {

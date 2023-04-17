@@ -10,13 +10,23 @@ Préparer tous les scénarios utilisateurs possibles avec l'utilisation des APIs
 
 <br>
 
-## 2. Calculer la pause dans logic.js
+## 2. PARSE MORE DATA FROM XLS FILE logic.js
   
 `LOGIC`
 
 **DESCR :**
 
-Sortir la logique capable d'extraire des tables les informations concernant les pauses (dej, ou petites pauses de 30 min) afin de les intégrer dans l'objet employee et de les utiliser.
+Sortir la logique capable d'extraire des tables les informations concernant les pauses (dej, ou petites pauses de 30 min), les commentaires de Kev (fel, caisse, formation) avec leur code couleur afin de les intégrer dans l'objet employee et de les utiliser dans l'UI.
+
+<br>
+
+## 3. PRODUCE APP's DIAGRAM
+  
+`ARCHITECTURE`
+
+**DESCR :**
+
+Pour gagner du temps à chaque fois que je reviens au code après plusieurs jours : produire un diagramme compréhensif du fonctionnement de l'appli avec tous ses components, suivre le cheminement de la logic et de la data pour que je puisse identifier immédiatement sur quel noeud je dois intervenir et à quel endroit.
 
 <br>
 
@@ -36,7 +46,6 @@ Sortir la logique capable d'extraire des tables les informations concernant les 
 4. [BACKEND]  
 - Création d'une API pour compter les fichiers présents dans 'public/weeks'  
 - Refonte du component Upload  
-- Création d'une API pour compter les files  
 5. [DEBUG]  
 - Fixed le pb de picker une nouvelle semaine qd l'employé actif n'y est plus présent (il a démissionné, il n'est plus présent sur le planning, donc l'app ne doit pas essayer de matcher son nom avec les données qu'elle reçoit)
 

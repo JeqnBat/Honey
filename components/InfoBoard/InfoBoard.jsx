@@ -35,7 +35,7 @@ const InfoBoard = () => {
               return <Menu />
             case 'upload success':
               return <Success msg={success} />
-            case 'upload fil':
+            case 'upload fail':
               return <UploadFail msg={error} />
             default:
               return <p>Woops</p>

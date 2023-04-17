@@ -22,6 +22,7 @@ const Index = () => {
       try {
         const update = await fetch('./api/update')
         const response = update.status
+
         // checks if "public/xlsFiles" is empty
         if (response !== 200) {
           setState({ status: 'files missing' })
@@ -29,8 +30,8 @@ const Index = () => {
         } else {
           const weeks = await fetch(`./api/countWeeks`)
           const { numberOfFiles } = await weeks.json()
-          const response = await fetch(`./api/loadSingleWeek`)
-          const rawText = await response.text()
+          const res = await fetch(`./api/loadSingleWeek`)
+          const rawText = await res.text()
           const data = JSON.parse(rawText)
           
           init(data)

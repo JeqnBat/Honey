@@ -20,7 +20,7 @@
 #wrapper > form > label > input {
   display: none;
 }
-#wrapper > form > label > img {
+.img {
   cursor: pointer;
   width: 150px;
   filter: invert();
