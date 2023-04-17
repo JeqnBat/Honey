@@ -40,7 +40,7 @@ const UploadFile = () => {
     <section id={uploadStyles.wrapper}>
       <form>
         <label htmlFor='file-input'>
-          <Image className={uploadStyles.img} height='150' width='150' src='./icons/upload.svg' alt='upload-icon' />
+          <Image className={uploadStyles.img} height='150' width='150' src='/icons/upload.svg' alt='upload-icon' />
           <input id='file-input' type='file' onChange={(e) => handleSubmit(e)} />
         </label>
         <div className='spacinho'></div>

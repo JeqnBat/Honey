@@ -1,4 +1,4 @@
-import OffDayStyles from './../SingleView.module.css'
+import OffDayStyles from './OffDay.module.css'
 import Image from 'next/image'
 
 const OffDay = ({ name }) => {

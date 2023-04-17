@@ -1,5 +1,5 @@
 import Loading from '../components/Loading/Loading'
-import Header from '/components/Header/Header'
+import Header from '../components/Header/Header'
 import DateBoard from '../components/DateBoard/DateBoard'
 import WeekBoard from '../components/WeekBoard/WeekBoard'
 import EmployeeOverview from '../components/EmployeeOverview/EmployeeOverview'
