@@ -1,0 +1,59 @@
+/**
+ * @WEEKPICKER.MODULE.CSS
+ */
+#wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#wrapper::after {
+  position: absolute;
+  content: ' ';
+  inset: 0;
+  left: 112px;
+  right: 11px;
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+  border-left:0;
+  border-right:0;
+}
+#wrapper > span {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-right: 10px;
+  margin-bottom: 3px;
+}
+#wrapper > span:last-of-type {
+  border-color: var(--primary);
+  padding: 2px;
+  min-width: 40px;
+  text-align: center;
+}
+.rotate {
+	-webkit-animation: rotate 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+	        animation: rotate 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+}
+
+/* ANIMATIONS */
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotateX(0);
+            transform: rotateX(0);
+  }
+  100% {
+    -webkit-transform: rotateX(-360deg);
+            transform: rotateX(-360deg);
+  }
+}
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotateX(0);
+            transform: rotateX(0);
+  }
+  100% {
+    -webkit-transform: rotateX(-360deg);
+            transform: rotateX(-360deg);
+  }
+}
